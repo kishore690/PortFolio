@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kishore V — Building things, badly at first</title>
+<meta name="description" content="Kishore V — Information Science student building full-stack apps, AI experiments and backend systems.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#F7F3EA',
+        ink: '#221F1B',
+        mustard: '#E8A430',
+        indigo: '#2B3A67',
+        clover: '#3F6B4F',
+      },
+      fontFamily: {
+        display: ['"Bricolage Grotesque"', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        hand: ['Caveat', 'cursive'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  :root{
+    --paper:#070A13; --ink:#F5F7FF; --mustard:#7C5CFF; --indigo:#55D6FF; --clover:#63E6BE;
+    box-sizing:border-box;
+  }
+  html{scroll-behavior:smooth; scroll-padding-top:5rem;}
+  body{background:var(--paper); color:var(--ink);}
+  .squiggle-underline{position:relative; display:inline-block;}
+  .squiggle-underline svg{position:absolute; left:0; bottom:-0.18em; width:100%; height:0.3em;}
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .card-lift{transition:transform .25s ease, box-shadow .25s ease;}
+  .card-lift:hover{transform:translateY(-6px) rotate(-0.4deg);}
+  .nav-glass{backdrop-filter:blur(0px); background:rgba(247,243,234,0); transition:all .3s ease;}
+  .nav-glass.scrolled{backdrop-filter:blur(10px); background:rgba(247,243,234,0.82); box-shadow:0 1px 0 rgba(34,31,27,0.08);}
+  .sticker{transform:rotate(-3deg);}
+  .float-tag{animation:bob 5s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-8px) rotate(2deg);}}
+  ::selection{background:var(--mustard); color:var(--ink);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    .float-tag{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+  a:focus-visible, button:focus-visible{outline:3px solid var(--indigo); outline-offset:2px; border-radius:4px;}
+  #modal-overlay{backdrop-filter:blur(4px);}
+
+  /* ===== SPACE THEME ===== */
+  body{
+    background:
+      radial-gradient(circle at 15% 10%, rgba(124,92,255,.18), transparent 28%),
+      radial-gradient(circle at 85% 20%, rgba(85,214,255,.12), transparent 25%),
+      radial-gradient(circle at 50% 80%, rgba(99,230,190,.07), transparent 25%),
+      #070A13;
+    color:#F5F7FF;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+    opacity:.45;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(255,255,255,.5) 0 1px, transparent 1.5px);
+    background-size: 97px 97px, 151px 151px;
+    background-position: 10px 20px, 60px 80px;
+  }
+  body::after{
+    content:"";
+    position:fixed; width:420px; height:420px; border-radius:50%;
+    right:-180px; top:12%; pointer-events:none; z-index:-1;
+    background:radial-gradient(circle, rgba(124,92,255,.2), transparent 68%);
+    filter:blur(10px);
+  }
+  .nav-glass{background:rgba(7,10,19,.18); border-bottom:1px solid transparent;}
+  .nav-glass.scrolled{
+    background:rgba(7,10,19,.72);
+    box-shadow:0 1px 0 rgba(255,255,255,.08);
+    border-bottom-color:rgba(255,255,255,.07);
+  }
+  .nav-glass a:hover{color:#55D6FF!important}
+  .text-ink,.text-ink\/70,.text-ink\/60,.text-ink\/40,.text-ink\/30{color:#F5F7FF!important}
+  .text-ink\/70{opacity:.72}.text-ink\/60{opacity:.58}.text-ink\/40{opacity:.4}.text-ink\/30{opacity:.25}
+  .bg-white{
+    background:rgba(16,21,37,.72)!important;
+    border-color:rgba(255,255,255,.10)!important;
+    box-shadow:0 18px 60px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.04);
+    backdrop-filter:blur(14px);
+  }
+  .bg-paper{background:#070A13!important}
+  .border-ink\/10,.border-ink\/15,.border-ink\/20{border-color:rgba(255,255,255,.10)!important}
+  .bg-ink{
+    background:#F5F7FF!important;color:#070A13!important;
+  }
+  .bg-ink:hover{background:#55D6FF!important}
+  .text-mustard{color:#9A7CFF!important}
+  .text-indigo{color:#55D6FF!important}
+  .text-clover{color:#63E6BE!important}
+  .bg-mustard\/20{background:rgba(124,92,255,.16)!important;border-color:rgba(124,92,255,.38)!important}
+  .bg-clover{background:#63E6BE!important}
+  .border-mustard\/40{border-color:rgba(124,92,255,.45)!important}
+  .border-2{border-color:rgba(255,255,255,.3)!important}
+  .hover\:bg-indigo:hover{background:#55D6FF!important;color:#070A13!important}
+  .hover\:text-indigo:hover{color:#55D6FF!important}
+  .sticker{
+    transform:rotate(-3deg);
+    box-shadow:0 12px 40px rgba(0,0,0,.25);
+  }
+  .float-tag{
+    background:rgba(16,21,37,.8)!important;
+    color:#F5F7FF;
+    border-color:rgba(255,255,255,.12)!important;
+    box-shadow:0 10px 35px rgba(0,0,0,.3);
+    backdrop-filter:blur(12px);
+  }
+  #home{min-height:100vh; display:flex; flex-direction:column; justify-content:center}
+  #home::before{
+    content:"";
+    position:absolute; width:620px; height:620px; border-radius:50%;
+    right:-180px; top:80px; z-index:-1;
+    background:radial-gradient(circle at 35% 35%, rgba(85,214,255,.18), rgba(124,92,255,.08) 38%, transparent 70%);
+    border:1px solid rgba(255,255,255,.05);
+  }
+  #home h1{
+    text-shadow:0 0 45px rgba(124,92,255,.16);
+    letter-spacing:-.04em;
+  }
+  .squiggle-underline svg path{stroke:#7C5CFF!important}
+  #home > div:last-child{
+    background:linear-gradient(135deg,rgba(18,25,44,.9),rgba(10,14,27,.75))!important;
+    border:1px solid rgba(255,255,255,.11)!important;
+    box-shadow:0 25px 90px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.05)!important;
+    max-width:100%;
+  }
+  #home > div:last-child .bg-paper{
+    background:rgba(255,255,255,.045)!important;
+    border:1px solid rgba(255,255,255,.07);
+  }
+  section{position:relative}
+  section h2{letter-spacing:-.03em}
+  .card-lift:hover{
+    transform:translateY(-8px) rotate(-.2deg);
+    border-color:rgba(85,214,255,.3)!important;
+    box-shadow:0 22px 70px rgba(0,0,0,.35), 0 0 35px rgba(85,214,255,.06);
+  }
+  #project-grid button{position:relative;overflow:hidden}
+  #project-grid button::before{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent,rgba(85,214,255,.06),transparent);
+    transform:translateX(-100%);transition:transform .6s ease;
+  }
+  #project-grid button:hover::before{transform:translateX(100%)}
+  #modal-overlay{background:rgba(2,4,10,.75)!important}
+  #modal-panel{
+    background:#0D1220!important;
+    color:#F5F7FF;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 30px 120px rgba(0,0,0,.55);
+  }
+  footer{border-color:rgba(255,255,255,.08)!important}
+  footer .text-ink{color:#F5F7FF!important}
+  a:focus-visible,button:focus-visible{outline-color:#55D6FF}
+  ::selection{background:#7C5CFF;color:white}
+
+  /* Space decorations */
+  .space-orbit{
+    position:absolute; width:390px; height:390px; border:1px solid rgba(85,214,255,.12);
+    border-radius:50%; right:-90px; top:170px; pointer-events:none;
+  }
+  .space-orbit::before,.space-orbit::after{
+    content:"";position:absolute;border-radius:50%;border:1px solid rgba(124,92,255,.12);
+    inset:45px;transform:rotate(35deg) scaleX(1.8);
+  }
+  .space-orbit::after{inset:105px;transform:rotate(-35deg) scaleX(1.6)}
+  .planet{
+    position:absolute;width:11px;height:11px;border-radius:50%;
+    background:#55D6FF;box-shadow:0 0 18px #55D6FF;
+    right:65px;top:95px;
+  }
+  @media(max-width:767px){
+    #home{min-height:auto}
+    .space-orbit{width:250px;height:250px;right:-100px;top:280px}
+  }
+
+
+  /* ===== MODERN COSMIC CURSOR ===== */
+  html, body, a, button { cursor: none; }
+
+  #cursor-dot{
+    position:fixed;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:#55D6FF;
+    box-shadow:0 0 14px rgba(85,214,255,.9),0 0 30px rgba(124,92,255,.45);
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:width .18s ease,height .18s ease,background .18s ease,box-shadow .18s ease;
+  }
+
+  #cursor-ring{
+    position:fixed;
+    width:34px;height:34px;
+    border:1px solid rgba(85,214,255,.55);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:
+      width .22s cubic-bezier(.2,.8,.2,1),
+      height .22s cubic-bezier(.2,.8,.2,1),
+      border-color .22s ease,
+      background .22s ease,
+      opacity .22s ease;
+  }
+
+  #cursor-ring::after{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:1px solid rgba(124,92,255,.28);
+    border-radius:50%;
+  }
+
+  body.cursor-hover #cursor-dot{
+    width:5px;height:5px;
+    background:#fff;
+    box-shadow:0 0 18px rgba(85,214,255,1),0 0 35px rgba(124,92,255,.8);
+  }
+
+  body.cursor-hover #cursor-ring{
+    width:52px;height:52px;
+    border-color:rgba(124,92,255,.8);
+    background:rgba(124,92,255,.08);
+  }
+
+  body.cursor-click #cursor-ring{
+    width:25px;height:25px;
+    border-color:#fff;
+  }
+
+  @media (pointer:coarse){
+    html, body, a, button { cursor:auto; }
+    #cursor-dot,#cursor-ring{display:none!important}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    #cursor-ring,#cursor-dot{transition:none}
+  }
+
+
+/* ===== PORTFOLIO ART-DIRECTION OVERRIDES ===== */
+:root{
+  --space:#070914;
+  --navy:#0b1030;
+  --violet:#7357ff;
+  --cyan:#5ee7ff;
+  --coral:#ff5a4f;
+  --warm:#ff8a63;
+  --white:#f7f7ff;
+}
+body{
+  background:
+    radial-gradient(900px 600px at 78% 7%, rgba(115,87,255,.20), transparent 62%),
+    radial-gradient(700px 500px at 8% 25%, rgba(255,90,79,.09), transparent 65%),
+    linear-gradient(135deg,#050711 0%,#080b1d 48%,#0b1030 100%);
+}
+body::before{
+  opacity:.28;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.95) 0 1px,transparent 1.3px),
+    radial-gradient(circle,rgba(94,231,255,.55) 0 1px,transparent 1.5px);
+  background-size:113px 113px,181px 181px;
+}
+.nav-glass.scrolled{
+  background:rgba(5,7,17,.76);
+  backdrop-filter:blur(18px);
+}
+#home{
+  max-width:1280px;
+  min-height:92vh;
+  padding-top:145px;
+  padding-bottom:90px;
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+  gap:60px;
+  align-items:center;
+}
+.hero-copy{position:relative;z-index:2}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  color:#aab5d6;font-size:.78rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.hero-kicker::before{
+  content:"";width:30px;height:1px;background:var(--coral);
+  box-shadow:0 0 12px rgba(255,90,79,.7);
+}
+#home h1{
+  font-size:clamp(3.5rem,7vw,6.7rem)!important;
+  line-height:.91!important;
+  max-width:780px!important;
+  letter-spacing:-.065em;
+}
+#home h1 .accent-word{color:var(--coral)}
+.hero-sub{
+  margin-top:28px!important;
+  max-width:600px!important;
+  color:rgba(247,247,255,.68)!important;
+  font-size:1.08rem!important;
+  line-height:1.8;
+}
+.hero-actions{margin-top:34px!important}
+.hero-actions .primary{
+  background:var(--coral)!important;color:#fff!important;
+  box-shadow:0 12px 35px rgba(255,90,79,.22);
+}
+.hero-actions .primary:hover{background:#ff766c!important}
+.hero-actions .secondary{
+  border-color:rgba(255,255,255,.22)!important;
+  color:#fff!important;
+}
+.hero-actions .secondary:hover{background:rgba(255,255,255,.08)!important}
+.hero-social{
+  border-color:rgba(255,255,255,.16)!important;
+  color:#fff!important;
+}
+.hero-visual{
+  position:relative;
+  min-height:560px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.photo-orbit{
+  position:absolute;width:480px;height:480px;border-radius:50%;
+  border:1px solid rgba(115,87,255,.32);
+  box-shadow:0 0 80px rgba(115,87,255,.10);
+}
+.photo-orbit::before{
+  content:"";position:absolute;inset:-22px;border-radius:50%;
+  border:1px solid rgba(94,231,255,.12);
+  transform:rotate(-17deg) scaleX(1.22);
+}
+.photo-orbit::after{
+  content:"";position:absolute;inset:50px;border-radius:50%;
+  border:1px solid rgba(255,90,79,.16);
+  transform:rotate(28deg) scaleX(1.35);
+}
+.photo-wrap{
+  position:relative;width:370px;height:490px;
+  border-radius:190px 190px 30px 30px;
+  overflow:hidden;
+  background:linear-gradient(160deg,#151b45,#080a16);
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 35px 90px rgba(0,0,0,.48),0 0 60px rgba(115,87,255,.13);
+  z-index:2;
+}
+.photo-wrap::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(115,87,255,.03),transparent 48%,rgba(5,7,17,.18));
+  pointer-events:none;
+}
+.photo-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center top;
+  filter:saturate(.95) contrast(1.03);
+}
+.paint-stroke{
+  position:absolute;width:430px;height:130px;z-index:1;
+  right:-15px;bottom:40px;transform:rotate(-10deg);
+  background:linear-gradient(90deg,transparent 0%,rgba(255,90,79,.10) 10%,rgba(255,90,79,.72) 45%,rgba(255,138,99,.48) 80%,transparent 100%);
+  clip-path:polygon(0 45%,8% 30%,18% 38%,27% 22%,42% 33%,55% 14%,70% 30%,82% 18%,100% 42%,90% 63%,75% 54%,61% 72%,45% 58%,30% 79%,15% 64%,5% 72%);
+  filter:blur(.2px);
+}
+.orbit-label{
+  position:absolute;z-index:4;
+  background:rgba(9,12,29,.82);
+  border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(12px);
+  color:#fff;padding:10px 14px;border-radius:999px;
+  font-size:.72rem;font-weight:700;letter-spacing:.06em;
+  box-shadow:0 12px 35px rgba(0,0,0,.3);
+}
+.label-one{top:70px;left:0}.label-two{right:0;top:190px}.label-three{bottom:65px;left:15px}
+.status-chip{
+  position:absolute;right:18px;bottom:18px;z-index:5;
+  padding:9px 13px;border-radius:999px;
+  background:rgba(8,12,24,.84);border:1px solid rgba(99,230,190,.22);
+  color:#bdf9e5;font-size:.72rem;font-weight:700;
+  backdrop-filter:blur(10px);
+}
+.status-chip span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#63e6be;margin-right:7px;box-shadow:0 0 12px #63e6be}
+.section-kicker{
+  color:var(--coral);font-size:.72rem;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;
+}
+section h2{
+  font-size:clamp(2.2rem,4vw,4rem)!important;
+  letter-spacing:-.055em!important;
+}
+#about,#projects,#skills,#journey{max-width:1280px}
+.bento-card{
+  background:linear-gradient(145deg,rgba(17,22,49,.78),rgba(8,11,26,.72))!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+}
+#project-grid button{
+  min-height:230px;
+  background:linear-gradient(145deg,rgba(17,22,49,.86),rgba(8,11,26,.74))!important;
+}
+#project-grid button:first-child{
+  min-height:300px;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(255,90,79,.12),transparent 30%),
+    linear-gradient(145deg,rgba(28,28,67,.92),rgba(8,11,26,.82))!important;
+}
+#project-grid button:hover{
+  border-color:rgba(255,90,79,.35)!important;
+  box-shadow:0 25px 80px rgba(0,0,0,.4),0 0 40px rgba(255,90,79,.07);
+}
+#journey .border-l-2{border-color:rgba(115,87,255,.3)!important}
+#journey .bg-mustard{background:var(--coral)!important}
+footer{background:rgba(3,5,12,.25)}
+/* Better cursor: elegant halo + orbit, not oversized */
+html,body,a,button{cursor:none}
+#cursor-dot{
+  width:5px!important;height:5px!important;
+  background:#fff!important;
+  box-shadow:0 0 12px #5ee7ff,0 0 26px rgba(115,87,255,.75)!important;
+}
+#cursor-ring{
+  width:30px!important;height:30px!important;
+  border:1px solid rgba(94,231,255,.62)!important;
+  background:rgba(94,231,255,.015);
+  box-shadow:inset 0 0 10px rgba(115,87,255,.08),0 0 18px rgba(94,231,255,.05);
+}
+#cursor-ring::before{
+  content:"";position:absolute;inset:-5px;border:1px solid rgba(255,90,79,.24);
+  border-radius:50%;animation:cursorOrbit 3s linear infinite;
+}
+#cursor-ring::after{inset:10px!important;border-color:rgba(255,255,255,.16)!important}
+@keyframes cursorOrbit{to{transform:rotate(360deg)}}
+body.cursor-hover #cursor-ring{
+  width:46px!important;height:46px!important;
+  border-color:rgba(255,90,79,.78)!important;
+  background:rgba(255,90,79,.045);
+}
+body.cursor-hover #cursor-dot{
+  width:6px!important;height:6px!important;
+  box-shadow:0 0 18px #fff,0 0 32px rgba(255,90,79,.75)!important;
+}
+body.cursor-click #cursor-ring{width:24px!important;height:24px!important}
+@media(max-width:900px){
+  #home{grid-template-columns:1fr;gap:35px;padding-top:125px}
+  .hero-visual{min-height:500px}
+  .photo-orbit{width:420px;height:420px}
+}
+@media(max-width:560px){
+  #home{padding-top:105px}
+  #home h1{font-size:3.2rem!important}
+  .hero-visual{min-height:430px}
+  .photo-wrap{width:290px;height:390px}
+  .photo-orbit{width:330px;height:330px}
+  .paint-stroke{width:330px;right:-35px}
+  .label-one{left:-5px;top:35px}.label-two{right:-4px;top:145px}.label-three{left:0;bottom:35px}
+}
+
+</style>
+</head>
+<body class="font-body antialiased">
+
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="cursor-dot" aria-hidden="true"></div>
+
+
+<!-- NAV -->
+<nav id="nav" class="nav-glass fixed top-0 inset-x-0 z-50" style="padding-top:env(safe-area-inset-top,0px)">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    <a href="#home" class="font-display font-extrabold text-xl tracking-tight">KISHORE<span class="text-mustard">.</span></a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#about" class="hover:text-indigo transition-colors">About</a>
+      <a href="#projects" class="hover:text-indigo transition-colors">Projects</a>
+      <a href="#skills" class="hover:text-indigo transition-colors">Skills</a>
+      <a href="#journey" class="hover:text-indigo transition-colors">Journey</a>
+      <a href="#contact" class="hover:text-indigo transition-colors">Contact</a>
+      <span class="flex items-center gap-1.5 text-xs text-clover font-semibold">
+        <span class="w-2 h-2 rounded-full bg-clover inline-block animate-pulse"></span> Currently in orbit
+      </span>
+    </div>
+    <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
+      <span class="block w-6 h-0.5 bg-ink"></span><span class="block w-6 h-0.5 bg-ink"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden px-6 pb-5 flex flex-col gap-4 text-sm font-medium">
+    <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="home" class="relative mx-auto px-6 overflow-hidden">
+  <div class="hero-copy">
+    <div class="hero-kicker">INFORMATION SCIENCE & ENGINEERING · 2026</div>
+    <p class="font-hand text-2xl text-indigo mb-3">Hey, I'm Kishore 👋</p>
+    <h1 class="font-display font-extrabold">
+      I build <span class="accent-word">digital things</span><br>
+      that are actually useful.
+    </h1>
+    <p class="hero-sub">
+      Full Stack Developer & AI/ML enthusiast building products across Java, Python,
+      backend systems, AI and real-world hardware.
+    </p>
+    <div class="hero-actions flex flex-wrap items-center gap-4">
+      <a href="#projects" class="primary px-6 py-3 rounded-full font-semibold">Explore my work ↗</a>
+      <a href="#contact" class="secondary border-2 px-6 py-3 rounded-full font-semibold">Let's talk</a>
+      <a href="https://github.com/kishore690" target="_blank" rel="noopener" aria-label="GitHub" class="hero-social w-11 h-11 rounded-full border flex items-center justify-center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.3-.52-1.5.11-3.14 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.64.24 2.84.12 3.14.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.15v3.18c0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/kishorev0806" target="_blank" rel="noopener" aria-label="LinkedIn" class="hero-social w-11 h-11 rounded-full border flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-label="Portrait of Kishore">
+    <div class="photo-orbit"></div>
+    <div class="paint-stroke"></div>
+    <span class="orbit-label label-one">JAVA ☕</span>
+    <span class="orbit-label label-two">AI / ML ✦</span>
+    <span class="orbit-label label-three">FULL STACK</span>
+    <div class="photo-wrap">
+      <img src="assets/kishore-photo.png" alt="Kishore V">
+      <div class="status-chip"><span></span>currently building</div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="section-kicker">01 / About</div><h2 class="reveal font-display font-extrabold text-3xl md:text-4xl mb-8">A little about me.</h2>
+  <div class="reveal grid md:grid-cols-5 gap-12">
+    <div class="md:col-span-3 space-y-5 text-lg text-ink/80 leading-relaxed">
+      <p>I'm an Information Science & Engineering student who enjoys turning ideas into working products.</p>
+      <p>I started with programming and gradually got pulled into backend development, AI/ML, system building and problem solving.</p>
+      <p>These days you'll usually find me solving DSA problems in Java, building full-stack applications, experimenting with AI, or breaking something and figuring out why it stopped working.</p>
+    </div>
+    <div class="md:col-span-2 grid grid-cols-2 gap-5">
+      <div class="bg-white rounded-2xl border border-ink/10 p-5"><p class="font-display font-extrabold text-3xl text-indigo">8.70</p><p class="text-xs text-ink/60 mt-1">CGPA</p></div>
+      <div class="bg-white rounded-2xl border border-ink/10 p-5"><p class="font-display font-extrabold text-3xl text-mustard">5+</p><p class="text-xs text-ink/60 mt-1">Major Projects</p></div>
+      <div class="bg-white rounded-2xl border border-ink/10 p-5"><p class="font-display font-extrabold text-3xl text-clover">300+</p><p class="text-xs text-ink/60 mt-1">DSA Problems — goal</p></div>
+      <div class="bg-white rounded-2xl border border-ink/10 p-5"><p class="font-display font-extrabold text-3xl text-indigo">∞</p><p class="text-xs text-ink/60 mt-1">Things I want to build</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I LIKE BUILDING -->
+<section class="max-w-6xl mx-auto px-6 pb-24">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="reveal card-lift bg-white rounded-2xl border border-ink/10 p-6"><div class="text-2xl mb-3">🧩</div><p class="font-semibold mb-1">Full Stack Apps</p><p class="text-sm text-ink/60">Turning ideas into usable products.</p></div>
+    <div class="reveal card-lift bg-white rounded-2xl border border-ink/10 p-6"><div class="text-2xl mb-3">✨</div><p class="font-semibold mb-1">AI Experiments</p><p class="text-sm text-ink/60">Making software a little smarter.</p></div>
+    <div class="reveal card-lift bg-white rounded-2xl border border-ink/10 p-6"><div class="text-2xl mb-3">🗄️</div><p class="font-semibold mb-1">Backend Systems</p><p class="text-sm text-ink/60">APIs, databases and the stuff behind the screen.</p></div>
+    <div class="reveal card-lift bg-white rounded-2xl border border-ink/10 p-6"><div class="text-2xl mb-3">🧠</div><p class="font-semibold mb-1">Problem Solving</p><p class="text-sm text-ink/60">DSA, algorithms and figuring out why things don't work.</p></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="max-w-6xl mx-auto px-6 py-8 pb-24">
+  <div class="section-kicker">02 / Selected work</div><h2 class="reveal font-display font-extrabold text-3xl md:text-4xl mb-2">Things I've been building.</h2>
+  <p class="reveal text-ink/60 mb-10">Click a project for the full story.</p>
+  <div id="project-grid" class="grid gap-6"></div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="max-w-6xl mx-auto px-6 py-8 pb-24">
+  <div class="section-kicker">03 / Toolkit</div><h2 class="reveal font-display font-extrabold text-3xl md:text-4xl mb-10">Tools I play with.</h2>
+  <div class="reveal grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="bg-white rounded-2xl border border-ink/10 p-6"><p class="font-hand text-xl text-indigo mb-2">Languages</p><p class="text-sm text-ink/70">Java · Python · C · JavaScript</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-6"><p class="font-hand text-xl text-indigo mb-2">Frontend</p><p class="text-sm text-ink/70">React · HTML · CSS</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-6"><p class="font-hand text-xl text-indigo mb-2">Backend</p><p class="text-sm text-ink/70">Spring Boot · FastAPI · REST APIs</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-6"><p class="font-hand text-xl text-indigo mb-2">Databases</p><p class="text-sm text-ink/70">MySQL · PostgreSQL</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-6"><p class="font-hand text-xl text-indigo mb-2">AI / ML</p><p class="text-sm text-ink/70">Machine Learning · Deep Learning · LLMs · RAG</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-6"><p class="font-hand text-xl text-indigo mb-2">Tools</p><p class="text-sm text-ink/70">Git · GitHub · Postman · Docker</p></div>
+  </div>
+</section>
+
+<!-- DSA -->
+<section class="max-w-6xl mx-auto px-6 py-8 pb-24">
+  <h2 class="reveal font-display font-extrabold text-3xl md:text-4xl mb-3">Currently fighting with algorithms.</h2>
+  <p class="reveal text-ink/70 mb-8">Practicing DSA primarily with Java.</p>
+  <div class="reveal flex flex-wrap items-center gap-2 text-sm font-medium">
+    <span class="bg-mustard/20 border border-mustard/40 rounded-full px-4 py-1.5">Arrays</span>
+    <span class="text-ink/30">→</span>
+    <span class="bg-mustard/20 border border-mustard/40 rounded-full px-4 py-1.5">Strings</span>
+    <span class="text-ink/30">→</span>
+    <span class="bg-mustard/20 border border-mustard/40 rounded-full px-4 py-1.5">Hashing</span>
+    <span class="text-ink/30">→</span>
+    <span class="bg-mustard/20 border border-mustard/40 rounded-full px-4 py-1.5">Linked List</span>
+    <span class="text-ink/30">→</span>
+    <span class="bg-paper border border-ink/20 rounded-full px-4 py-1.5">Trees</span>
+    <span class="text-ink/30">→</span>
+    <span class="bg-paper border border-ink/20 rounded-full px-4 py-1.5">Graphs</span>
+    <span class="text-ink/30">→</span>
+    <span class="bg-paper border border-ink/20 rounded-full px-4 py-1.5">DP</span>
+  </div>
+  <div class="reveal mt-6 flex gap-4 text-sm font-semibold">
+    <a href="#" target="_blank" rel="noopener" class="underline hover:text-indigo">LeetCode profile</a>
+    <a href="https://github.com/kishore690" target="_blank" rel="noopener" class="underline hover:text-indigo">GitHub</a>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="max-w-6xl mx-auto px-6 py-8 pb-24">
+  <div class="section-kicker">04 / Journey</div><h2 class="reveal font-display font-extrabold text-3xl md:text-4xl mb-10">The journey so far.</h2>
+  <div class="reveal relative pl-8 border-l-2 border-ink/15 space-y-10 max-w-2xl">
+    <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-mustard"></span><p class="font-display font-bold text-xl">2023</p><p class="text-ink/70 mt-1">Started engineering journey.</p></div>
+    <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-mustard"></span><p class="font-display font-bold text-xl">2024</p><p class="text-ink/70 mt-1">Started exploring programming, web development and databases.</p></div>
+    <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-mustard"></span><p class="font-display font-bold text-xl">2025</p><p class="text-ink/70 mt-1">Started building full-stack applications and exploring AI/ML.</p></div>
+    <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-3 h-3 rounded-full bg-clover"></span><p class="font-display font-bold text-xl">2026</p><p class="text-ink/70 mt-1">Focused on DSA, full-stack development, AI/ML and building larger real-world projects.</p></div>
+  </div>
+</section>
+
+<!-- CURRENTLY BUILDING -->
+<section class="max-w-6xl mx-auto px-6 py-8 pb-24">
+  <div class="reveal bg-ink text-paper rounded-3xl p-8 md:p-10 flex flex-wrap items-center justify-between gap-6">
+    <div>
+      <p class="text-xs uppercase tracking-wide text-paper/50 mb-2">build log</p>
+      <h3 class="font-display font-extrabold text-2xl md:text-3xl mb-2">🛒 Smart Trolley</h3>
+      <p class="text-paper/70 max-w-md">Human-following + obstacle avoidance + RFID + automatic billing.</p>
+    </div>
+    <span class="flex items-center gap-2 bg-paper/10 rounded-full px-4 py-2 text-sm font-medium">
+      <span class="w-2 h-2 rounded-full bg-clover inline-block animate-pulse"></span> In progress
+    </span>
+  </div>
+</section>
+
+<!-- FUN -->
+<section class="max-w-6xl mx-auto px-6 py-8 pb-24">
+  <h2 class="reveal font-display font-extrabold text-3xl md:text-4xl mb-10">When I'm not coding...</h2>
+  <div class="reveal grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
+    <div class="bg-white rounded-2xl border border-ink/10 p-5"><div class="text-2xl mb-2">☕</div><p class="text-xs text-ink/60">Coffee + coding</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-5"><div class="text-2xl mb-2">🎧</div><p class="text-xs text-ink/60">Podcasts</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-5"><div class="text-2xl mb-2">📈</div><p class="text-xs text-ink/60">Exploring markets</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-5"><div class="text-2xl mb-2">🧠</div><p class="text-xs text-ink/60">Learning something new</p></div>
+    <div class="bg-white rounded-2xl border border-ink/10 p-5"><div class="text-2xl mb-2">🚀</div><p class="text-xs text-ink/60">Building random ideas</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="max-w-6xl mx-auto px-6 py-8 pb-28 text-center">
+  <p class="reveal font-hand text-2xl text-indigo mb-2">✈️</p>
+  <h2 class="reveal font-display font-extrabold text-3xl md:text-5xl mb-3">Got an idea from another planet?</h2>
+  <p class="reveal text-lg text-ink/70 mb-8">Let's turn it into something real.</p>
+  <div class="reveal flex flex-wrap justify-center gap-4">
+    <a href="mailto:kishorevenu2020@gmail.com" class="bg-ink text-paper px-6 py-3 rounded-full font-semibold hover:bg-indigo transition-colors">Email me</a>
+    <a href="https://www.linkedin.com/in/kishorev0806" target="_blank" rel="noopener" class="border-2 border-ink px-6 py-3 rounded-full font-semibold hover:bg-ink hover:text-paper transition-colors">LinkedIn</a>
+    <a href="https://github.com/kishore690" target="_blank" rel="noopener" class="border-2 border-ink px-6 py-3 rounded-full font-semibold hover:bg-ink hover:text-paper transition-colors">GitHub</a>
+  </div>
+</section>
+
+<footer class="border-t border-ink/10">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-ink/60">
+    <div>
+      <p class="font-display font-bold text-ink">Kishore V</p>
+      <p class="mt-1">Built with curiosity, caffeine & questionable debugging decisions.</p>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="https://github.com/kishore690" target="_blank" rel="noopener" class="hover:text-ink">GitHub</a>
+      <a href="https://www.linkedin.com/in/kishorev0806" target="_blank" rel="noopener" class="hover:text-ink">LinkedIn</a>
+      <a href="mailto:kishorevenu2020@gmail.com" class="hover:text-ink">Email</a>
+    </div>
+  </div>
+  <p class="text-center text-xs text-ink/40 pb-8">© 2026 Kishore V</p>
+</footer>
+
+<!-- PROJECT MODAL -->
+<div id="modal-overlay" class="hidden fixed inset-0 bg-ink/40 z-[60] flex items-start sm:items-center justify-center p-4 overflow-y-auto">
+  <div id="modal-panel" role="dialog" aria-modal="true" class="bg-paper rounded-3xl max-w-2xl w-full my-8 p-6 sm:p-10 relative"></div>
+</div>
+
+<script>
+// ---- Project data ----
+const projects = [
+  {
+    icon: "📖", title: "PlotForgeAI", tag: "Featured", featured:true,
+    summary: "An AI-powered storytelling platform that helps users create, manage and read stories with an interactive generation workflow.",
+    tech: ["Java","Spring Boot","React","Database","AI/LLM integration"],
+    features: ["Authentication","Story CRUD","Story generation","Story library","Read stories","Character/world building","AI-assisted creation"],
+    problem: "Writers often stall between an idea and a finished story, with no structured way to develop plot, characters and world together.",
+    solution: "A platform where users can generate, edit and organize stories with AI assistance guiding structure, characters and continuity.",
+    learned: "Designing APIs around an AI generation workflow, and keeping a Spring Boot backend clean while a React frontend iterates fast."
+  },
+  {
+    icon: "🔌", title: "EVFLOW", tag: "AI + Backend",
+    summary: "A smart EV navigation system designed to recommend charging options based on route and vehicle requirements.",
+    tech: ["Python","FastAPI","MySQL","SQLAlchemy","AI"],
+    features: ["Vehicle onboarding","Charging station APIs","Route planning","Charging recommendations","Backend architecture"],
+    problem: "EV drivers need charging stops that actually fit their route and vehicle range, not just the nearest station.",
+    solution: "A FastAPI backend that combines route data with vehicle specs to recommend charging stops along the way.",
+    learned: "Structuring a backend around real-world constraints like range and station availability, not just CRUD."
+  },
+  {
+    icon: "📊", title: "SME Decision Simulator", tag: "Data + ML",
+    summary: "A decision-support platform that analyzes business data and provides useful insights for small and medium businesses.",
+    tech: ["Python","FastAPI","Pandas","MySQL","Machine Learning"],
+    features: ["CSV upload","Revenue analysis","Order analysis","Product insights","Business risk categorization","Dashboard"],
+    problem: "Small businesses generate sales data but rarely have the tools to turn it into decisions.",
+    solution: "Upload a CSV and get back revenue trends, product insights and a risk category, on a simple dashboard.",
+    learned: "Turning messy spreadsheet data into something a non-technical business owner can actually act on."
+  },
+  {
+    icon: "🛒", title: "Smart Trolley", tag: "Hardware + Software",
+    summary: "A smart shopping trolley that combines hardware, computer vision and automatic billing to create a more convenient shopping experience.",
+    tech: ["Arduino","Raspberry Pi","Python","Computer Vision","RFID","Ultrasonic Sensor","FastAPI","React"],
+    features: ["Human following","Obstacle detection","RFID","Automatic billing","Product tracking","Smart navigation"],
+    problem: "Manual scanning and cart-pushing slow down the in-store shopping experience.",
+    solution: "A trolley that follows the shopper, avoids obstacles, scans items via RFID and bills automatically.",
+    learned: "Getting hardware (Arduino/Raspberry Pi sensors) and software (CV, billing API) to work together reliably in real time."
+  },
+  {
+    icon: "🎨", title: "Image Colorization", tag: "Deep Learning",
+    summary: "Deep learning project that automatically adds color to grayscale images.",
+    tech: ["Python","Deep Learning","Computer Vision"],
+    features: ["Grayscale input","Automatic colorization","Model training pipeline"],
+    problem: "Old or grayscale photos lose a lot of visual context without color.",
+    solution: "A deep learning model trained to predict plausible color for grayscale images.",
+    learned: "Working hands-on with CNNs and image data pipelines for a generative computer vision task."
+  }
+];
+
+const grid = document.getElementById('project-grid');
+projects.forEach((p, i) => {
+  const card = document.createElement('button');
+  card.className = `reveal card-lift text-left bg-white rounded-3xl border border-ink/10 p-6 md:p-8 flex items-start gap-5 w-full ${p.featured ? 'md:col-span-2' : ''}`;
+  card.innerHTML = `
+    <div class="text-4xl shrink-0">${p.icon}</div>
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="font-display font-bold text-xl">${p.title}</h3>
+        <span class="text-xs bg-mustard/20 text-ink/70 rounded-full px-2.5 py-0.5">${p.tag}</span>
+      </div>
+      <p class="text-ink/60 text-sm mb-3">${p.summary}</p>
+      <div class="flex flex-wrap gap-1.5">
+        ${p.tech.slice(0,4).map(t=>`<span class="text-xs border border-ink/15 rounded-full px-2.5 py-1">${t}</span>`).join('')}
+      </div>
+    </div>
+    <span class="project-arrow text-xl self-center transition-transform">→</span>
+  `;
+  card.addEventListener('click', () => openModal(i));
+  grid.appendChild(card);
+});
+grid.className = "grid md:grid-cols-2 gap-6";
+
+function openModal(i){
+  const p = projects[i];
+  const panel = document.getElementById('modal-panel');
+  panel.innerHTML = `
+    <button id="modal-close" aria-label="Close" class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-paper transition-colors">✕</button>
+    <div class="text-4xl mb-3">${p.icon}</div>
+    <h3 class="font-display font-extrabold text-2xl md:text-3xl mb-4">${p.title}</h3>
+    <p class="text-ink/80 mb-6">${p.summary}</p>
+    <div class="grid sm:grid-cols-2 gap-5 mb-6">
+      <div><p class="text-xs uppercase tracking-wide text-ink/40 mb-1">Problem</p><p class="text-sm text-ink/80">${p.problem}</p></div>
+      <div><p class="text-xs uppercase tracking-wide text-ink/40 mb-1">Solution</p><p class="text-sm text-ink/80">${p.solution}</p></div>
+    </div>
+    <p class="text-xs uppercase tracking-wide text-ink/40 mb-2">Tech stack</p>
+    <div class="flex flex-wrap gap-1.5 mb-6">${p.tech.map(t=>`<span class="text-xs bg-paper border border-ink/15 rounded-full px-2.5 py-1">${t}</span>`).join('')}</div>
+    <p class="text-xs uppercase tracking-wide text-ink/40 mb-2">Key features</p>
+    <ul class="grid sm:grid-cols-2 gap-x-4 gap-y-1 mb-6 text-sm text-ink/80 list-disc list-inside">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+    <p class="text-xs uppercase tracking-wide text-ink/40 mb-1">What I learned</p>
+    <p class="text-sm text-ink/80 mb-7">${p.learned}</p>
+    <div class="flex gap-3">
+      <a href="https://github.com/kishore690" target="_blank" rel="noopener" class="bg-ink text-paper px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-indigo transition-colors">GitHub</a>
+      <a href="#" class="border-2 border-ink px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-ink hover:text-paper transition-colors">Live demo</a>
+    </div>
+  `;
+  document.getElementById('modal-overlay').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal-overlay').addEventListener('click', e => { if(e.target.id === 'modal-overlay') closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+// ---- Nav scroll glass ----
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+
+// ---- Mobile menu ----
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('hidden') === false;
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+// ---- Scroll reveal ----
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---- Modern cosmic cursor ----
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+  }, {passive:true});
+
+  function animateCursor(){
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .card-lift').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
+
+</script>
+</body>
+</html>
