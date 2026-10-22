@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kishore V — Building things, badly at first</title>
-<meta name="description" content="Kishore V — Information Science student building full-stack apps, AI experiments and backend systems.">
+<title>Kishore V — Software Engineer & Full-Stack Developer</title>
+<meta name="description" content="Kishore V is an Information Science and Engineering student focused on full-stack development, backend systems and applied AI.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -1485,8 +1485,108 @@ tailwind.config = {
   }
 
 </style>
+<style>
+  :root{--paper:#080a12;--ink:#f3f4fa;--mustard:#9b7cff;--indigo:#6bdcff;--clover:#78e0bc;--coral:#a78bfa;--line:rgba(255,255,255,.1);color-scheme:dark}
+  html{background:var(--paper)}
+  body{position:relative;isolation:isolate;background:transparent;color:var(--ink);overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 78% 9%,rgba(105,73,211,.2),transparent 36%),radial-gradient(ellipse at 5% 48%,rgba(49,151,185,.1),transparent 34%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:auto,auto,64px 64px,64px 64px;mask-image:linear-gradient(#000 0%,rgba(0,0,0,.75) 68%,transparent 100%);animation:grid-drift 36s linear infinite}
+  body::after{content:"";position:fixed;width:34rem;height:34rem;right:-15rem;top:12%;z-index:-1;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(124,92,255,.12),transparent 68%);filter:blur(12px);animation:ambient-drift 16s ease-in-out infinite alternate}
+  @keyframes grid-drift{to{background-position:0 64px,0 0,64px 64px,64px 0}}
+  @keyframes ambient-drift{to{transform:translate(-12vw,18vh) scale(1.2)}}
+  .nav-glass,.nav-glass.scrolled{background:rgba(8,10,18,.76);border-bottom:1px solid transparent;backdrop-filter:blur(18px);transition:background .3s,border-color .3s}
+  .nav-glass.scrolled{background:rgba(8,10,18,.92);border-color:var(--line)}
+  #home{min-height:min(850px,100svh);padding-top:140px;padding-bottom:90px;gap:clamp(32px,6vw,92px)}
+  #home h1{font-size:clamp(3.4rem,7vw,6.4rem)!important;line-height:.98!important;letter-spacing:-.075em}
+  #home h1 .accent-word{background:linear-gradient(110deg,#c3b4ff 10%,#76dfff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-kicker{color:#aeb5c9}.hero-kicker::before{background:#a78bfa;box-shadow:0 0 16px rgba(167,139,250,.6)}
+  .hero-sub{color:#aeb4c5!important;font-size:1.04rem!important;max-width:560px!important}
+  .hero-actions .primary{background:linear-gradient(110deg,#8a68ef,#5c9fea)!important;color:#fff!important;box-shadow:0 10px 32px rgba(112,92,220,.25)}
+  .hero-actions .primary:hover{filter:brightness(1.12)}
+  .hero-actions .secondary,.hero-social{border-color:rgba(255,255,255,.18)!important;color:#f3f4fa!important}
+  .hero-actions .secondary:hover,.hero-social:hover{background:rgba(255,255,255,.08)!important}
+  .photo-orbit{border-color:rgba(159,133,255,.32);box-shadow:0 0 100px rgba(119,93,223,.14);animation:orbit-breathe 7s ease-in-out infinite}
+  .photo-orbit::before{border-color:rgba(107,220,255,.18)}
+  @keyframes orbit-breathe{50%{transform:scale(1.035) rotate(5deg)}}
+  .paint-stroke{opacity:.46}.orbit-label{background:rgba(14,17,29,.88);border-color:rgba(255,255,255,.12);backdrop-filter:blur(12px)}
+  .status-chip{background:rgba(12,16,26,.88);border:1px solid var(--line);backdrop-filter:blur(12px)}
+  section{scroll-margin-top:88px}.section-kicker{color:#a995ff!important}
+  section h2,section h3{letter-spacing:-.035em}
+  .bg-white{background:linear-gradient(145deg,rgba(20,23,35,.96),rgba(13,16,26,.96))!important;color:#f3f4fa}
+  [class*="border-ink/10"],[class*="border-ink/15"]{border-color:var(--line)!important}
+  [class*="text-ink/80"],[class*="text-ink/70"]{color:#b8bdcb!important}
+  [class*="text-ink/60"]{color:#9097aa!important}[class*="text-ink/40"]{color:#72798d!important}
+  [class*="bg-mustard/20"]{background:rgba(155,124,255,.12)!important;color:#c2b2ff!important;border-color:rgba(155,124,255,.24)!important}
+  [class*="bg-ink text-paper"]{background:linear-gradient(120deg,#8666e9,#417ba9)!important;color:white!important}
+  .card-lift:hover{transform:translateY(-5px);box-shadow:0 18px 55px rgba(0,0,0,.28)}
+  #project-grid button{background:linear-gradient(145deg,rgba(20,23,35,.97),rgba(12,15,24,.98))!important;border-color:var(--line)!important;transition:transform .3s,border-color .3s,box-shadow .3s}
+  #project-grid button:hover{border-color:rgba(155,124,255,.5)!important}#project-grid button::before{opacity:.16}
+  #contact .border-2{border-color:var(--line)!important}#contact .border-2:hover{background:#f3f4fa;color:#10121b}
+  #modal-overlay{background:rgba(2,3,8,.78);backdrop-filter:blur(8px)}
+  #modal-panel{background:#11141f!important;border:1px solid var(--line);box-shadow:0 28px 90px rgba(0,0,0,.48)}
+  #menu-btn span{background:#f3f4fa}footer{border-color:var(--line)!important}
+  #cursor-ring,#cursor-dot{display:none!important}
+  .font-display,.font-hand{font-family:"Manrope",sans-serif!important}
+  .font-body,body{font-family:"DM Sans",sans-serif!important}
+  .font-hand{font-weight:600;letter-spacing:-.035em}
+  .solar-system{position:fixed;z-index:-1;left:55%;top:46%;width:min(90vw,1050px);aspect-ratio:1.18;transform:translate(-50%,-50%) rotate(-12deg);pointer-events:none;opacity:.4;mask-image:radial-gradient(ellipse at center,#000 0%,rgba(0,0,0,.9) 48%,transparent 78%)}
+  .solar-system::before{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 12% 24%,rgba(255,255,255,.55) 50%,transparent 100%),radial-gradient(1px 1px at 82% 18%,rgba(195,203,255,.55) 50%,transparent 100%),radial-gradient(1.5px 1.5px at 73% 76%,rgba(255,255,255,.45) 50%,transparent 100%),radial-gradient(1px 1px at 23% 83%,rgba(176,195,255,.48) 50%,transparent 100%),radial-gradient(1px 1px at 91% 53%,rgba(255,255,255,.4) 50%,transparent 100%);background-size:211px 197px}
+  .solar-system::after{content:"";position:absolute;left:50%;top:50%;width:45%;height:45%;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(255,185,104,.055),transparent 68%)}
+  .sun-core{position:absolute;left:50%;top:50%;width:clamp(42px,6vw,76px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff0c7 0%,#ffc86f 14%,#f18443 38%,#bb4938 62%,#50242d 78%,transparent 79%);box-shadow:0 0 22px rgba(255,171,86,.4),0 0 75px rgba(251,129,62,.18),0 0 150px rgba(245,126,72,.08)}
+  .planet-orbit{position:absolute;left:50%;top:50%;width:var(--orbit-size);height:var(--orbit-size);border:1px solid rgba(209,205,191,.14);border-radius:50%;transform:translate(-50%,-50%) scaleY(var(--orbit-flat)) rotate(var(--orbit-tilt));animation:solar-revolve var(--orbit-speed) linear infinite}
+  .planet-orbit::after{content:"";position:absolute;width:var(--planet-size);height:var(--planet-size);left:50%;top:0;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 31% 27%,var(--planet-highlight),var(--planet-color) 46%,var(--planet-shadow) 82%);box-shadow:inset -3px -2px 5px rgba(0,0,0,.58),0 0 9px rgba(0,0,0,.25)}
+  .planet-orbit:nth-child(2){--orbit-size:24%;--orbit-speed:20s;--orbit-flat:.42;--orbit-tilt:-15deg;--planet-size:6px;--planet-color:#b6a894;--planet-highlight:#ead9c1;--planet-shadow:#62574b}
+  .planet-orbit:nth-child(3){--orbit-size:39%;--orbit-speed:31s;--orbit-flat:.48;--orbit-tilt:22deg;--planet-size:10px;--planet-color:#ce8e59;--planet-highlight:#f1cb92;--planet-shadow:#633c2d}
+  .planet-orbit:nth-child(4){--orbit-size:56%;--orbit-speed:44s;--orbit-flat:.38;--orbit-tilt:-8deg;--planet-size:12px;--planet-color:#598c9b;--planet-highlight:#b5d2c9;--planet-shadow:#263849}
+  .planet-orbit:nth-child(5){--orbit-size:72%;--orbit-speed:61s;--orbit-flat:.45;--orbit-tilt:13deg;--planet-size:13px;--planet-color:#9c5b45;--planet-highlight:#dfa27b;--planet-shadow:#4b3030}
+  .planet-orbit:nth-child(6){--orbit-size:91%;--orbit-speed:82s;--orbit-flat:.4;--orbit-tilt:-19deg;--planet-size:21px;--planet-color:#bf8b61;--planet-highlight:#f0d0a1;--planet-shadow:#584131}
+  .planet-orbit:nth-child(6)::before{content:"";position:absolute;width:34px;height:9px;left:50%;top:0;border:1px solid rgba(219,181,133,.55);border-radius:50%;transform:translate(-50%,-50%) rotate(-12deg)}
+  @keyframes solar-revolve{to{transform:translate(-50%,-50%) scaleY(var(--orbit-flat)) rotate(calc(var(--orbit-tilt) + 360deg))}}
+  @media(max-width:767px){.solar-system{width:130vw;top:36%;opacity:.22}}
+  @media(max-width:767px){#home{min-height:auto;padding-top:125px;padding-bottom:56px}.hero-visual{min-height:460px}.photo-orbit{max-width:calc(100vw - 50px);max-height:calc(100vw - 50px)}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+<style>
+  :root{--paper:#0c0615;--ink:#f8f5ff;--mustard:#a855f7;--indigo:#c084fc;--clover:#c084fc;--coral:#a855f7;--line:rgba(198,150,255,.15)}
+  body::before{background:radial-gradient(ellipse at 5% 4%,rgba(106,31,161,.22),transparent 36%),radial-gradient(ellipse at 96% 26%,rgba(91,37,144,.13),transparent 34%),linear-gradient(rgba(218,190,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(218,190,255,.018) 1px,transparent 1px);background-size:auto,auto,68px 68px,68px 68px}
+  body::after{background:radial-gradient(circle,rgba(145,47,255,.18),transparent 68%)}
+  .nav-glass,.nav-glass.scrolled{background:rgba(12,6,21,.74)}.nav-glass.scrolled{background:rgba(12,6,21,.93);border-color:var(--line)}
+  #home h1 .accent-word{background:linear-gradient(105deg,#d8a4ff,#8b35e8 74%);-webkit-background-clip:text;background-clip:text}
+  .hero-kicker::before{background:#b663f4;box-shadow:0 0 16px rgba(182,99,244,.65)}
+  .hero-actions .primary{background:linear-gradient(110deg,#963fe3,#6624b5)!important;box-shadow:0 10px 32px rgba(139,52,211,.27)}
+  .photo-orbit{border-color:rgba(185,112,255,.3);box-shadow:0 0 100px rgba(143,47,208,.16)}.photo-orbit::before{border-color:rgba(202,145,255,.17)}
+  .orbit-label,.status-chip{background:rgba(20,9,32,.9);border-color:rgba(198,150,255,.17)}
+  .section-kicker{color:#c084fc!important}
+  .bg-white,#project-grid button{background:linear-gradient(140deg,rgba(27,13,43,.94),rgba(17,9,28,.97))!important;border-color:rgba(191,132,255,.14)!important}
+  #project-grid button:hover{border-color:rgba(192,132,252,.48)!important;box-shadow:0 18px 55px rgba(73,25,106,.26)}
+  [class*="bg-mustard/20"]{background:rgba(168,85,247,.14)!important;color:#d9b5ff!important;border-color:rgba(192,132,252,.24)!important}
+  #modal-panel{background:#170d23!important;border-color:rgba(198,150,255,.18)}
+  [class*="bg-ink text-paper"]{background:linear-gradient(115deg,#913be0,#6523b6)!important}
+  #contact .border-2:hover{background:#f5eaff;color:#210b35}
+  @media(max-width:767px){.solar-system{opacity:.22}}
+  @media(pointer:fine){html,body,a,button{cursor:none!important}#cursor-dot,#cursor-ring{display:block!important;position:fixed;top:0;left:0;z-index:9999;pointer-events:none;border-radius:50%;will-change:transform;transform:translate(-50%,-50%)}
+    #cursor-dot{width:7px!important;height:7px!important;background:#fff!important;box-shadow:0 0 8px #fff,0 0 18px #ba72ff,0 0 32px rgba(186,114,255,.7)!important;transition:width .2s,height .2s,box-shadow .2s}
+    #cursor-ring{width:36px!important;height:36px!important;border:1px solid rgba(205,155,255,.76)!important;background:radial-gradient(circle,rgba(179,91,255,.08),transparent 70%)!important;box-shadow:0 0 18px rgba(162,75,255,.2),inset 0 0 10px rgba(191,123,255,.12)!important;transition:width .28s cubic-bezier(.2,.8,.2,1),height .28s cubic-bezier(.2,.8,.2,1),border-color .2s,background .2s}
+    #cursor-ring::before{content:"";position:absolute;inset:-5px;border:1px solid rgba(211,163,255,.34);border-radius:50%;transform:rotate(-28deg) scaleY(.48);animation:cursorOrbit 3.6s linear infinite}
+    #cursor-ring::after{content:"";position:absolute;inset:13px!important;border:0!important;border-radius:50%;background:#d6a5ff;box-shadow:0 0 10px #b871ff}
+    body.cursor-hover #cursor-ring{width:54px!important;height:54px!important;border-color:rgba(228,195,255,.98)!important;background:rgba(163,79,235,.13)!important;box-shadow:0 0 28px rgba(166,74,255,.38)!important}
+    body.cursor-hover #cursor-ring::before{inset:-7px;border-color:rgba(228,195,255,.56)}
+    body.cursor-hover #cursor-dot{width:9px!important;height:9px!important;box-shadow:0 0 12px #fff,0 0 24px #c684ff,0 0 42px rgba(184,101,255,.9)!important}
+    body.cursor-click #cursor-ring{width:28px!important;height:28px!important}
+  }
+  @media(pointer:coarse){html,body,a,button{cursor:auto!important}#cursor-dot,#cursor-ring{display:none!important}}
+  @media(prefers-reduced-motion:reduce){#cursor-ring::before{animation:none!important}}
+</style>
 </head>
 <body class="font-body antialiased">
+
+  <div class="solar-system" aria-hidden="true">
+    <div class="sun-core"></div>
+    <div class="planet-orbit"></div>
+    <div class="planet-orbit"></div>
+    <div class="planet-orbit"></div>
+    <div class="planet-orbit"></div>
+    <div class="planet-orbit"></div>
+  </div>
 
   <div id="cursor-ring" aria-hidden="true"></div>
   <div id="cursor-dot" aria-hidden="true"></div>
@@ -1495,15 +1595,16 @@ tailwind.config = {
 <!-- NAV -->
 <nav id="nav" class="nav-glass fixed top-0 inset-x-0 z-50" style="padding-top:env(safe-area-inset-top,0px)">
   <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-    <a href="#home" class="font-display font-extrabold text-xl tracking-tight">KISHORE<span class="text-mustard">.</span></a>
+    <a href="#home" class="font-display font-extrabold text-xl tracking-tight" aria-label="Kishore home">K<span class="text-mustard">.</span></a>
     <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#home" class="hover:text-indigo transition-colors">Home</a>
       <a href="#about" class="hover:text-indigo transition-colors">About</a>
-      <a href="#projects" class="hover:text-indigo transition-colors">Projects</a>
+      <a href="#projects" class="hover:text-indigo transition-colors">Lab</a>
       <a href="#skills" class="hover:text-indigo transition-colors">Skills</a>
       <a href="#journey" class="hover:text-indigo transition-colors">Journey</a>
       <a href="#contact" class="hover:text-indigo transition-colors">Contact</a>
       <span class="flex items-center gap-1.5 text-xs text-clover font-semibold">
-        <span class="w-2 h-2 rounded-full bg-clover inline-block animate-pulse"></span> Currently in orbit
+        <span class="w-2 h-2 rounded-full bg-clover inline-block animate-pulse"></span> Open to opportunities
       </span>
     </div>
     <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
@@ -1511,7 +1612,7 @@ tailwind.config = {
     </button>
   </div>
   <div id="mobile-menu" class="hidden md:hidden px-6 pb-5 flex flex-col gap-4 text-sm font-medium">
-    <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+    <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Lab</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -1519,14 +1620,12 @@ tailwind.config = {
 <header id="home" class="relative mx-auto px-6 overflow-hidden">
   <div class="hero-copy">
     <div class="hero-kicker">INFORMATION SCIENCE & ENGINEERING · 2026</div>
-    <p class="font-hand text-2xl text-indigo mb-3">Hey, I'm Kishore 👋</p>
+    <p class="font-hand text-2xl text-indigo mb-3">Hello, I'm Kishore.</p>
     <h1 class="font-display font-extrabold">
-      I build <span class="accent-word">digital things</span><br>
-      that are actually useful.
+      I'm a <span class="accent-word">Software Engineer.</span>
     </h1>
     <p class="hero-sub">
-      Full Stack Developer & AI/ML enthusiast building products across Java, Python,
-      backend systems, AI and real-world hardware.
+      Full-stack developer focused on thoughtful digital products, backend systems and applied AI. I turn complex ideas into useful, reliable software.
     </p>
     <div class="hero-actions flex flex-wrap items-center gap-4">
       <a href="#projects" class="primary px-6 py-3 rounded-full font-semibold">Explore my work ↗</a>
@@ -1548,7 +1647,7 @@ tailwind.config = {
     <span class="orbit-label label-three">FULL STACK</span>
     <div class="photo-wrap">
       <img src="assets/kishore-photo.png" alt="Kishore V">
-      <div class="status-chip"><span></span>currently building</div>
+      <div class="status-chip"><span></span>building & learning</div>
     </div>
   </div>
 </header>
