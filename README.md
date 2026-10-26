@@ -1,13 +1,12 @@
-# Kishore V — Space Portfolio
+# Kishore V — Developer Portfolio
 
-A responsive single-page personal portfolio with a dark space aesthetic, editorial red accents, orbit effects, project modals, and a custom cosmic cursor.
+A responsive, single-page developer portfolio built with HTML, CSS, and vanilla JavaScript. It includes a cinematic animated solar-system canvas, project case-study modals, a responsive navigation menu, and reduced-motion support.
 
 ## Run locally
 
-No build step is required.
+No package manager or build step is required.
 
-1. Extract/open this folder.
-2. Open `index.html` in a browser.
+1. Open `index.html` in a browser, or serve the folder locally.
 
 For a local server, from this folder run:
 
@@ -25,14 +24,13 @@ Drag the entire `kishore-space-portfolio` folder into Netlify Drop, or connect t
 ### GitHub Pages
 Create a repository, upload `index.html` and the `assets` folder, then enable Pages from the repository settings.
 
-## Files
+## Project files
 
-- `index.html` — complete portfolio
+- `index.html` — page markup, styles, interactions, and canvas illustration
 - `assets/kishore-photo.png` — hero portrait
 
-## Before publishing
+## External assets
 
-- Replace any `#` placeholder links with real URLs.
-- Add project-specific GitHub/live-demo URLs.
-- Add your resume PDF if you want a Resume button.
-- Verify the email, LinkedIn and GitHub links.
+Google Fonts and Tailwind CSS are loaded from CDNs. Fonts have system fallbacks; Tailwind utilities may be unavailable offline unless they are cached by the browser.
+
+The project case studies link to the existing GitHub profile. No live demo or resume file is included in this repository.
