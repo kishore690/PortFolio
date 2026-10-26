@@ -33,4 +33,4 @@ Create a repository, upload `index.html` and the `assets` folder, then enable Pa
 
 Google Fonts and Tailwind CSS are loaded from CDNs. Fonts have system fallbacks; Tailwind utilities may be unavailable offline unless they are cached by the browser.
 
-The project case studies link to the existing GitHub profile. No live demo or resume file is included in this repository.
+The SME Decision Simulator case study links to its deployed application at <https://sme-decision-simulator.vercel.app>. Other projects link to the GitHub profile until their live deployment URLs are confirmed. Smart Trolley is marked completed; EVFLOW has been removed from the portfolio. No resume file is included in this repository.

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kishore V — Software Engineer & Full-Stack Developer</title>
 <meta name="description" content="Kishore V — Information Science and Engineering student building full-stack software, backend systems, and applied AI projects.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070A10'/%3E%3Cpath d='M14 50V27l18-14 18 14v23h-9V31L32 23 23 31v19z' fill='none' stroke='%2377E5FF' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M29 50V38h6v12' fill='none' stroke='%23F0F4F8' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1806,16 +1806,16 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- CURRENTLY BUILDING -->
+<!-- COMPLETED PROJECT -->
 <section class="max-w-6xl mx-auto px-6 py-8 pb-24">
   <div class="reveal bg-ink text-paper rounded-3xl p-8 md:p-10 flex flex-wrap items-center justify-between gap-6">
     <div>
-      <p class="text-xs uppercase tracking-wide text-paper/50 mb-2">build log</p>
+      <p class="text-xs uppercase tracking-wide text-paper/50 mb-2">completed project</p>
       <h3 class="font-display font-extrabold text-2xl md:text-3xl mb-2">🛒 Smart Trolley</h3>
       <p class="text-paper/70 max-w-md">Human-following + obstacle avoidance + RFID + automatic billing.</p>
     </div>
     <span class="flex items-center gap-2 bg-paper/10 rounded-full px-4 py-2 text-sm font-medium">
-      <span class="w-2 h-2 rounded-full bg-clover inline-block animate-pulse"></span> In progress
+      <span class="w-2 h-2 rounded-full bg-clover inline-block"></span> Completed
     </span>
   </div>
 </section>
@@ -1873,16 +1873,8 @@ const projects = [
     learned: "Designing APIs around an AI generation workflow, and keeping a Spring Boot backend clean while a React frontend iterates fast."
   },
   {
-    icon: "🔌", title: "EVFLOW", tag: "AI + Backend",
-    summary: "A smart EV navigation system designed to recommend charging options based on route and vehicle requirements.",
-    tech: ["Python","FastAPI","MySQL","SQLAlchemy","AI"],
-    features: ["Vehicle onboarding","Charging station APIs","Route planning","Charging recommendations","Backend architecture"],
-    problem: "EV drivers need charging stops that actually fit their route and vehicle range, not just the nearest station.",
-    solution: "A FastAPI backend that combines route data with vehicle specs to recommend charging stops along the way.",
-    learned: "Structuring a backend around real-world constraints like range and station availability, not just CRUD."
-  },
-  {
     icon: "📊", title: "SME Decision Simulator", tag: "Data + ML",
+    liveUrl: "https://sme-decision-simulator.vercel.app",
     summary: "A decision-support platform that analyzes business data and provides useful insights for small and medium businesses.",
     tech: ["Python","FastAPI","Pandas","MySQL","Machine Learning"],
     features: ["CSV upload","Revenue analysis","Order analysis","Product insights","Business risk categorization","Dashboard"],
@@ -1913,12 +1905,11 @@ const projects = [
 const grid = document.getElementById('project-grid');
 const projectArtwork = [
   `<span class="art-window-label">GENERATIVE STORY WORKSPACE</span><div class="story-panel"><div class="story-line"></div><div class="story-line"></div><div class="story-line"></div><div class="story-line"></div><div class="story-orb"></div></div>`,
-  `<span class="art-window-label">EV ROUTE SYSTEM</span><div class="map-grid"></div><div class="map-route"></div><div class="map-pin"></div><div class="map-pin"></div><div class="art-orbit"></div>`,
   `<span class="art-window-label">BUSINESS SIGNALS</span><div class="chart-frame"><i style="--bar:32%"></i><i style="--bar:48%"></i><i style="--bar:39%"></i><i style="--bar:67%"></i><i style="--bar:54%"></i><i style="--bar:82%"></i><i style="--bar:72%"></i><i style="--bar:94%"></i></div>`,
   `<span class="art-window-label">SENSOR FIELD</span><div class="radar"></div>`,
   `<span class="art-window-label">IMAGE RECONSTRUCTION</span><div class="color-half"></div>`
 ];
-const projectArtClasses = ['art-story','art-map','art-analytics','art-trolley','art-color'];
+const projectArtClasses = ['art-story','art-analytics','art-trolley','art-color'];
 projects.forEach((p, i) => {
   const card = document.createElement('button');
   card.type = 'button';
@@ -1961,7 +1952,7 @@ function openModal(i, trigger){
     <ul class="grid sm:grid-cols-2 gap-x-4 gap-y-1 mb-6 text-sm text-ink/80 list-disc list-inside">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
     <p class="text-xs uppercase tracking-wide text-ink/40 mb-1">What I learned</p>
     <p class="text-sm text-ink/80 mb-7">${p.learned}</p>
-    <div class="flex gap-3"><a href="https://github.com/kishore690" target="_blank" rel="noopener noreferrer" class="bg-ink text-paper px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-indigo transition-colors">GitHub profile ↗</a></div>
+    <div class="flex flex-wrap gap-3">${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="bg-mustard text-paper px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-85 transition-opacity">Live application ↗</a>` : ''}<a href="https://github.com/kishore690" target="_blank" rel="noopener noreferrer" class="bg-ink text-paper px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-indigo transition-colors">GitHub profile ↗</a></div>
   `;
   const overlay = document.getElementById('modal-overlay');
   overlay.classList.remove('hidden');
