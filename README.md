@@ -27,7 +27,8 @@ Create a repository, upload `index.html` and the `assets` folder, then enable Pa
 ## Project files
 
 - `index.html` — page markup, design tokens, Three.js scene, and interactions
-- `assets/kishore-photo.png` — hero portrait
+- `assets/kishore-photo-white-bg.png` — hero portrait with a clean white background
+- `assets/kishore-photo.png` — original portrait asset
 
 ## External assets
 
