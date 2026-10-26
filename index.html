@@ -1528,20 +1528,7 @@ tailwind.config = {
   .font-display,.font-hand{font-family:"Manrope",sans-serif!important}
   .font-body,body{font-family:"DM Sans",sans-serif!important}
   .font-hand{font-weight:600;letter-spacing:-.035em}
-  .solar-system{position:fixed;z-index:-1;left:55%;top:46%;width:min(90vw,1050px);aspect-ratio:1.18;transform:translate(-50%,-50%) rotate(-12deg);pointer-events:none;opacity:.4;mask-image:radial-gradient(ellipse at center,#000 0%,rgba(0,0,0,.9) 48%,transparent 78%)}
-  .solar-system::before{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 12% 24%,rgba(255,255,255,.55) 50%,transparent 100%),radial-gradient(1px 1px at 82% 18%,rgba(195,203,255,.55) 50%,transparent 100%),radial-gradient(1.5px 1.5px at 73% 76%,rgba(255,255,255,.45) 50%,transparent 100%),radial-gradient(1px 1px at 23% 83%,rgba(176,195,255,.48) 50%,transparent 100%),radial-gradient(1px 1px at 91% 53%,rgba(255,255,255,.4) 50%,transparent 100%);background-size:211px 197px}
-  .solar-system::after{content:"";position:absolute;left:50%;top:50%;width:45%;height:45%;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(255,185,104,.055),transparent 68%)}
-  .sun-core{position:absolute;left:50%;top:50%;width:clamp(42px,6vw,76px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff0c7 0%,#ffc86f 14%,#f18443 38%,#bb4938 62%,#50242d 78%,transparent 79%);box-shadow:0 0 22px rgba(255,171,86,.4),0 0 75px rgba(251,129,62,.18),0 0 150px rgba(245,126,72,.08)}
-  .planet-orbit{position:absolute;left:50%;top:50%;width:var(--orbit-size);height:var(--orbit-size);border:1px solid rgba(209,205,191,.14);border-radius:50%;transform:translate(-50%,-50%) scaleY(var(--orbit-flat)) rotate(var(--orbit-tilt));animation:solar-revolve var(--orbit-speed) linear infinite}
-  .planet-orbit::after{content:"";position:absolute;width:var(--planet-size);height:var(--planet-size);left:50%;top:0;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 31% 27%,var(--planet-highlight),var(--planet-color) 46%,var(--planet-shadow) 82%);box-shadow:inset -3px -2px 5px rgba(0,0,0,.58),0 0 9px rgba(0,0,0,.25)}
-  .planet-orbit:nth-child(2){--orbit-size:24%;--orbit-speed:20s;--orbit-flat:.42;--orbit-tilt:-15deg;--planet-size:6px;--planet-color:#b6a894;--planet-highlight:#ead9c1;--planet-shadow:#62574b}
-  .planet-orbit:nth-child(3){--orbit-size:39%;--orbit-speed:31s;--orbit-flat:.48;--orbit-tilt:22deg;--planet-size:10px;--planet-color:#ce8e59;--planet-highlight:#f1cb92;--planet-shadow:#633c2d}
-  .planet-orbit:nth-child(4){--orbit-size:56%;--orbit-speed:44s;--orbit-flat:.38;--orbit-tilt:-8deg;--planet-size:12px;--planet-color:#598c9b;--planet-highlight:#b5d2c9;--planet-shadow:#263849}
-  .planet-orbit:nth-child(5){--orbit-size:72%;--orbit-speed:61s;--orbit-flat:.45;--orbit-tilt:13deg;--planet-size:13px;--planet-color:#9c5b45;--planet-highlight:#dfa27b;--planet-shadow:#4b3030}
-  .planet-orbit:nth-child(6){--orbit-size:91%;--orbit-speed:82s;--orbit-flat:.4;--orbit-tilt:-19deg;--planet-size:21px;--planet-color:#bf8b61;--planet-highlight:#f0d0a1;--planet-shadow:#584131}
-  .planet-orbit:nth-child(6)::before{content:"";position:absolute;width:34px;height:9px;left:50%;top:0;border:1px solid rgba(219,181,133,.55);border-radius:50%;transform:translate(-50%,-50%) rotate(-12deg)}
-  @keyframes solar-revolve{to{transform:translate(-50%,-50%) scaleY(var(--orbit-flat)) rotate(calc(var(--orbit-tilt) + 360deg))}}
-  @media(max-width:767px){.solar-system{width:130vw;top:36%;opacity:.22}}
+  .solar-system{position:fixed;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none;opacity:.82}
   @media(max-width:767px){#home{min-height:auto;padding-top:125px;padding-bottom:56px}.hero-visual{min-height:460px}.photo-orbit{max-width:calc(100vw - 50px);max-height:calc(100vw - 50px)}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
@@ -1562,7 +1549,7 @@ tailwind.config = {
   #modal-panel{background:#170d23!important;border-color:rgba(198,150,255,.18)}
   [class*="bg-ink text-paper"]{background:linear-gradient(115deg,#913be0,#6523b6)!important}
   #contact .border-2:hover{background:#f5eaff;color:#210b35}
-  @media(max-width:767px){.solar-system{opacity:.22}}
+  .solar-system{opacity:.78}
   @media(pointer:fine){html,body,a,button{cursor:none!important}#cursor-dot,#cursor-ring{display:block!important;position:fixed;top:0;left:0;z-index:9999;pointer-events:none;border-radius:50%;will-change:transform;transform:translate(-50%,-50%)}
     #cursor-dot{width:7px!important;height:7px!important;background:#fff!important;box-shadow:0 0 8px #fff,0 0 18px #ba72ff,0 0 32px rgba(186,114,255,.7)!important;transition:width .2s,height .2s,box-shadow .2s}
     #cursor-ring{width:36px!important;height:36px!important;border:1px solid rgba(205,155,255,.76)!important;background:radial-gradient(circle,rgba(179,91,255,.08),transparent 70%)!important;box-shadow:0 0 18px rgba(162,75,255,.2),inset 0 0 10px rgba(191,123,255,.12)!important;transition:width .28s cubic-bezier(.2,.8,.2,1),height .28s cubic-bezier(.2,.8,.2,1),border-color .2s,background .2s}
@@ -1579,14 +1566,7 @@ tailwind.config = {
 </head>
 <body class="font-body antialiased">
 
-  <div class="solar-system" aria-hidden="true">
-    <div class="sun-core"></div>
-    <div class="planet-orbit"></div>
-    <div class="planet-orbit"></div>
-    <div class="planet-orbit"></div>
-    <div class="planet-orbit"></div>
-    <div class="planet-orbit"></div>
-  </div>
+  <canvas id="solar-system" class="solar-system" aria-hidden="true"></canvas>
 
   <div id="cursor-ring" aria-hidden="true"></div>
   <div id="cursor-dot" aria-hidden="true"></div>
@@ -1919,6 +1899,195 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 }, {threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ---- Cinematic solar system canvas ----
+const solarCanvas = document.getElementById('solar-system');
+const solarContext = solarCanvas.getContext('2d', { alpha: true });
+const reduceSolarMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const solarBodies = [
+  {name:'Mercury',orbit:43,period:8.8,inclination:.21,node:-.15,phase:.4,radius:3.1,colors:['#f1ddc6','#a39480','#49424a'],type:'rock'},
+  {name:'Venus',orbit:63,period:14.5,inclination:.12,node:.18,phase:2.3,radius:5.1,colors:['#ffe0a6','#ce945e','#65483e'],type:'cloud'},
+  {name:'Earth',orbit:85,period:20,inclination:.08,node:-.25,phase:4.7,radius:5.9,colors:['#d4f4ff','#3488d5','#13254e'],type:'earth'},
+  {name:'Mars',orbit:111,period:31,inclination:.16,node:.08,phase:2.1,radius:4.5,colors:['#ffd1ae','#c35e49','#512d38'],type:'rock'},
+  {name:'Jupiter',orbit:161,period:55,inclination:.11,node:.28,phase:5.4,radius:13.5,colors:['#ffe9c2','#cd9872','#563e3f'],type:'bands'},
+  {name:'Saturn',orbit:215,period:74,inclination:.19,node:-.12,phase:1.7,radius:10.4,colors:['#fff0c7','#cfaa73','#594441'],type:'saturn'},
+  {name:'Uranus',orbit:268,period:98,inclination:.27,node:.22,phase:3.2,radius:7.4,colors:['#d4ffff','#70cbd0','#294f71'],type:'bands'},
+  {name:'Neptune',orbit:320,period:128,inclination:.13,node:-.2,phase:5.8,radius:7.2,colors:['#d5e5ff','#648edc','#242e74'],type:'bands'}
+];
+let solarWidth = 0, solarHeight = 0, solarScale = 1, solarStars = [], solarTime = 0, solarFrame = 0, solarLastFrame = 0;
+
+function resizeSolarCanvas(){
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+  solarWidth = window.innerWidth;
+  solarHeight = window.innerHeight;
+  solarCanvas.width = Math.round(solarWidth * dpr);
+  solarCanvas.height = Math.round(solarHeight * dpr);
+  solarCanvas.style.width = solarWidth + 'px';
+  solarCanvas.style.height = solarHeight + 'px';
+  solarContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+  solarScale = Math.min(solarWidth / 900, solarHeight / 700, 1.12);
+  solarStars = Array.from({length:Math.round(Math.min(150,solarWidth * solarHeight / 10500))},()=>({
+    x:Math.random()*solarWidth,y:Math.random()*solarHeight,r:.35+Math.random()*.85,
+    alpha:.16+Math.random()*.42,phase:Math.random()*Math.PI*2
+  }));
+  renderSolarSystem(solarTime);
+}
+
+function solarProjection(body, angle, centerX, centerY, scale){
+  const radius = body.orbit * scale;
+  const flat = Math.cos(body.inclination);
+  const depth = Math.sin(angle) * Math.sin(body.inclination) * radius;
+  const localX = Math.cos(angle) * radius;
+  const localY = Math.sin(angle) * flat * radius;
+  const cosNode = Math.cos(body.node), sinNode = Math.sin(body.node);
+  const perspective = 1 / (1 + depth / (980 * scale));
+  return {
+    x:centerX + (localX*cosNode-localY*sinNode)*perspective,
+    y:centerY + (localX*sinNode+localY*cosNode)*perspective,
+    z:depth,
+    perspective
+  };
+}
+
+function drawSolarOrbit(body, centerX, centerY, scale){
+  const ctx = solarContext;
+  ctx.beginPath();
+  for(let i=0;i<=180;i++){
+    const p=solarProjection(body,(i/180)*Math.PI*2,centerX,centerY,scale);
+    if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);
+  }
+  ctx.strokeStyle='rgba(211,181,239,.105)';
+  ctx.lineWidth=.8;
+  ctx.stroke();
+}
+
+function drawSaturnRings(x,y,radius,front){
+  const ctx=solarContext;
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(-.24);
+  ctx.scale(1,.34);
+  ctx.beginPath();
+  ctx.arc(0,0,radius*2.05,front?0:Math.PI,front?Math.PI:Math.PI*2);
+  ctx.arc(0,0,radius*1.35,front?Math.PI:Math.PI*2,front?0:Math.PI,true);
+  ctx.closePath();
+  const ring=ctx.createLinearGradient(-radius*2,0,radius*2,0);
+  ring.addColorStop(0,'rgba(190,151,104,.42)');
+  ring.addColorStop(.28,'rgba(255,231,187,.76)');
+  ring.addColorStop(.48,'rgba(155,119,90,.48)');
+  ring.addColorStop(.68,'rgba(255,226,177,.8)');
+  ring.addColorStop(1,'rgba(183,145,101,.38)');
+  solarContext.fillStyle=ring;
+  solarContext.fill();
+  solarContext.strokeStyle='rgba(255,232,191,.24)';
+  solarContext.lineWidth=.7;
+  solarContext.stroke();
+  ctx.restore();
+}
+
+function drawPlanet(body,position,scale,time){
+  const ctx=solarContext;
+  const r=Math.max(2.2,body.radius*scale*position.perspective);
+  const {x,y}=position;
+  if(body.type==='saturn')drawSaturnRings(x,y,r,false);
+  const atmosphere=ctx.createRadialGradient(x-r*.15,y-r*.18,r*.55,x,y,r*2.1);
+  atmosphere.addColorStop(0,'rgba(196,154,255,0)');
+  atmosphere.addColorStop(.72,'rgba(197,156,255,.035)');
+  atmosphere.addColorStop(1,'rgba(197,156,255,0)');
+  ctx.fillStyle=atmosphere;ctx.beginPath();ctx.arc(x,y,r*2.1,0,Math.PI*2);ctx.fill();
+  const sphere=ctx.createRadialGradient(x-r*.42,y-r*.48,r*.05,x+r*.08,y+r*.1,r*1.28);
+  sphere.addColorStop(0,body.colors[0]);sphere.addColorStop(.42,body.colors[1]);sphere.addColorStop(1,body.colors[2]);
+  ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.clip();
+  ctx.fillStyle=sphere;ctx.fillRect(x-r,y-r,r*2,r*2);
+  if(body.type==='earth'){
+    ctx.save();ctx.translate(x,y);ctx.rotate(time*.11+body.phase);
+    ctx.fillStyle='rgba(91,185,132,.78)';
+    ctx.beginPath();ctx.moveTo(-r*.82,-r*.16);ctx.lineTo(-r*.5,-r*.5);ctx.lineTo(-r*.15,-r*.34);ctx.lineTo(-r*.23,-r*.03);ctx.lineTo(-r*.54,r*.09);ctx.closePath();ctx.fill();
+    ctx.beginPath();ctx.moveTo(r*.1,-r*.34);ctx.lineTo(r*.56,-r*.2);ctx.lineTo(r*.68,r*.12);ctx.lineTo(r*.38,r*.42);ctx.lineTo(r*.14,r*.19);ctx.closePath();ctx.fill();
+    ctx.fillStyle='rgba(231,246,255,.55)';ctx.fillRect(-r,-r*.76,r*2,r*.13);ctx.fillRect(-r,r*.67,r*2,r*.12);
+    ctx.restore();
+  } else if(body.type==='bands'||body.type==='saturn'){
+    ctx.save();ctx.translate(x,y);ctx.rotate(time*.035+body.phase);
+    const bandCount=body.type==='saturn'?5:7;
+    for(let i=0;i<bandCount;i++){
+      const yy=-r+(i+1)*(2*r/(bandCount+1));
+      ctx.strokeStyle=i%2?'rgba(255,226,185,.17)':'rgba(45,38,64,.19)';
+      ctx.lineWidth=Math.max(.7,r*.16);ctx.beginPath();ctx.moveTo(-r,yy);ctx.lineTo(r,yy+Math.sin(i+time*.25)*r*.12);ctx.stroke();
+    }
+    if(body.name==='Jupiter'){
+      ctx.fillStyle='rgba(169,81,59,.58)';ctx.beginPath();ctx.ellipse(r*.35,r*.22,r*.28,r*.12,-.12,0,Math.PI*2);ctx.fill();
+    }
+    ctx.restore();
+  } else if(body.name==='Mercury'||body.name==='Mars'){
+    const craterAlpha=body.name==='Mercury' ? .22 : .16;
+    [[-.35,-.2,.16],[.36,.26,.11],[-.05,.52,.09]].forEach(([cx,cy,cr])=>{
+      ctx.fillStyle=`rgba(34,24,34,${craterAlpha})`;ctx.beginPath();ctx.arc(x+cx*r,y+cy*r,Math.max(.65,cr*r),0,Math.PI*2);ctx.fill();
+    });
+  }
+  const shine=ctx.createRadialGradient(x-r*.4,y-r*.45,0,x-r*.22,y-r*.24,r*.92);
+  shine.addColorStop(0,'rgba(255,255,255,.28)');shine.addColorStop(.34,'rgba(255,255,255,.08)');shine.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=shine;ctx.fillRect(x-r,y-r,r*2,r*2);
+  ctx.restore();
+  ctx.strokeStyle='rgba(245,224,255,.24)';ctx.lineWidth=.65;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();
+  if(body.type==='saturn')drawSaturnRings(x,y,r,true);
+}
+
+function drawSun(x,y,scale,time){
+  const ctx=solarContext;const r=Math.max(15,27*scale);
+  const glow=ctx.createRadialGradient(x,y,r*.55,x,y,r*8);
+  glow.addColorStop(0,'rgba(255,188,112,.3)');glow.addColorStop(.2,'rgba(239,120,86,.12)');glow.addColorStop(1,'rgba(150,74,208,0)');
+  ctx.fillStyle=glow;ctx.beginPath();ctx.arc(x,y,r*8,0,Math.PI*2);ctx.fill();
+  ctx.save();ctx.translate(x,y);ctx.rotate(time*.04);
+  for(let i=0;i<28;i++){
+    const a=(i/28)*Math.PI*2;
+    const inner=r*1.08,outer=r*(1.22+(i%4)*.045);
+    ctx.strokeStyle=i%3?'rgba(255,171,112,.12)':'rgba(255,213,153,.2)';ctx.lineWidth=.7;
+    ctx.beginPath();ctx.moveTo(Math.cos(a)*inner,Math.sin(a)*inner);ctx.lineTo(Math.cos(a)*outer,Math.sin(a)*outer);ctx.stroke();
+  }
+  ctx.restore();
+  const surface=ctx.createRadialGradient(x-r*.34,y-r*.4,r*.06,x+r*.15,y+r*.12,r*1.2);
+  surface.addColorStop(0,'#fff3cc');surface.addColorStop(.19,'#ffd28b');surface.addColorStop(.52,'#f69a65');surface.addColorStop(.82,'#a95168');surface.addColorStop(1,'#56315f');
+  ctx.shadowColor='rgba(255,162,112,.5)';ctx.shadowBlur=r*1.3;ctx.fillStyle=surface;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
+  ctx.strokeStyle='rgba(255,226,182,.55)';ctx.lineWidth=.8;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();
+}
+
+function renderSolarSystem(time){
+  if(!solarContext||!solarWidth||!solarHeight)return;
+  const ctx=solarContext;ctx.clearRect(0,0,solarWidth,solarHeight);
+  const mobile=solarWidth<700;
+  const centerX=solarWidth*(mobile ? .67 : .59),centerY=solarHeight*(mobile ? .39 : .45);
+  const scale=solarScale;
+  solarStars.forEach(star=>{
+    const twinkle=.78+.22*Math.sin(time*.65+star.phase);
+    ctx.fillStyle=`rgba(226,215,255,${star.alpha*twinkle})`;
+    ctx.beginPath();ctx.arc(star.x,star.y,star.r,0,Math.PI*2);ctx.fill();
+  });
+  solarBodies.forEach(body=>drawSolarOrbit(body,centerX,centerY,scale));
+  const positions=solarBodies.map(body=>{
+    const angle=body.phase+time*(.075*(80/body.period));
+    return {body,position:solarProjection(body,angle,centerX,centerY,scale)};
+  }).sort((a,b)=>a.position.z-b.position.z);
+  positions.forEach(({body,position})=>drawPlanet(body,position,scale,time));
+  drawSun(centerX,centerY,scale,time);
+}
+
+function animateSolarSystem(timestamp){
+  if(document.hidden)return;
+  if(solarLastFrame)solarTime+=Math.min((timestamp-solarLastFrame)/1000,.05);
+  solarLastFrame=timestamp;
+  renderSolarSystem(reduceSolarMotion.matches?0:solarTime);
+  if(!reduceSolarMotion.matches)solarFrame=requestAnimationFrame(animateSolarSystem);
+}
+
+function startSolarSystem(){
+  cancelAnimationFrame(solarFrame);solarLastFrame=0;
+  renderSolarSystem(reduceSolarMotion.matches?0:solarTime);
+  if(!reduceSolarMotion.matches)solarFrame=requestAnimationFrame(animateSolarSystem);
+}
+window.addEventListener('resize',resizeSolarCanvas,{passive:true});
+document.addEventListener('visibilitychange',()=>document.hidden?cancelAnimationFrame(solarFrame):startSolarSystem());
+reduceSolarMotion.addEventListener?.('change',startSolarSystem);
+resizeSolarCanvas();
 
   // ---- Modern cosmic cursor ----
   const cursorDot = document.getElementById('cursor-dot');
